@@ -21,7 +21,7 @@ namespace Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser newUser = new AppUser { UserName = user.UserName, Email = user.Email };
+                AppUser newUser = new AppUser { UserName = user.UserName, Email = user.Email};
                 IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
 
                 if (result.Succeeded)
@@ -50,9 +50,17 @@ namespace Application.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Redirect(loginVM.ReturnUrl ?? "/");
+                    var user = await _userManager.FindByNameAsync(loginVM.UserName);
+                    var role = await _userManager.GetRolesAsync(user);
+                    if (role[0] == "Admin")
+                    {
+                        return Redirect("/Admin/Products");
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
                 }
-
                 ModelState.AddModelError("", "Invalid username or password");
             }
 

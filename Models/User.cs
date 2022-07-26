@@ -4,7 +4,7 @@ namespace Application.Models
 {
     public class User
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required, MinLength(2, ErrorMessage = "Minimum length is 2")]
         [Display(Name = "Username")]
