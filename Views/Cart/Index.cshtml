@@ -5,40 +5,77 @@
 }
 @if (Model.CartItems.Count > 0)
 {
-    <table class="table">
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th></th>
-            <th>Price</th>
-            <th>Total</th>
-        </tr>
-        @foreach(var item in Model.CartItems)
-        {
-            <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Quantity</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductId">+</a>
-                    <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId">-</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductId">Remove</a>
-                </td>
-                <td>@item.Price.ToString("C2")</td>
-                <td>@Model.CartItems.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity*x.Price).ToString("C2")</td>
-            </tr>
-        }
-        <tr>
-            <td class=" text-right" colspan="4">Grand Total: @Model.GrandTotal.ToString("C2")</td>
-        </tr>
-        <tr>
-            <td class=" text-right" colspan="4">
-                <a class="btn btn-danger" asp-action="Clear">Clear Cart</a>
-                <a class="btn btn-primary" href="">Checkout</a>
-            </td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="bg-success mt-3 p-3 text-white">
+                <vc:small-cart />
+            </div>
+        </div>
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr class="cartItemRow" data-cartItemData='@Html.Raw(Json.Serialize(item))'>
+                        <td>@item.ProductName</td>
+                        <td>@item.Size.Value</td>
+                        <td>@item.Quantity</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId">-</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductId">Remove</a>
+                        </td>
+                        <td>@item.Price.ToString("C2")</td>
+                        <td>@Model.CartItems.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity*x.Price).ToString("C2")</td>
+                    </tr>
+                }
+                <tr>
+                    <td class=" text-right" colspan="4">Grand Total: @Model.GrandTotal.ToString("C2")</td>
+                </tr>
+                <tr>
+                    <td class=" text-right" colspan="4">
+                        <a class="btn btn-danger" asp-action="Clear">Clear Cart</a>
+                        <form asp-action="Finish" enctype="multipart/form-data">
+                            <input type="hidden" id="cart" value="@Model.CartItems" />
+                            <button id="btnsubmit" class="btn btn-primary btn-sm" style="margin-top:10px" onclick="finishCart()">Complete</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
 }
 else
 {
     <h3 class="display-4 text-center">Your cart is empty!</h3>
 }
+
+
+<script>
+    const finishCart = () => {
+        const cartItemRows = $('.cartItemRow');
+        const cartItems = [];
+        $(cartItemRows).each((i, row) => {
+            const cartItem = jQuery.parseJSON($(row).attr("data-cartItemData"))
+            cartItems.push(cartItem);
+        });
+        $.ajax({
+            method: "POST",
+            url: "/Cart/Finish",
+            data: { cart: cartItems }
+        })
+            .success(function(msg) {
+                alert("Data Saved: " + msg);
+            })
+            .error(function() {
+                alert("error");
+            })
+    }
+</script>

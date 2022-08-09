@@ -23,10 +23,9 @@ namespace Application.Controllers
             {
                 AppUser newUser = new AppUser { UserName = user.UserName, Email = user.Email};
                 IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
-
                 if (result.Succeeded)
                 {
-                    return Redirect("/admin/products");
+                    return Redirect("/");
                 }
 
                 foreach (IdentityError error in result.Errors)
@@ -47,12 +46,11 @@ namespace Application.Controllers
             if (ModelState.IsValid)
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, false, false);
-
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByNameAsync(loginVM.UserName);
                     var role = await _userManager.GetRolesAsync(user);
-                    if (role[0] == "Admin")
+                    if (role.Count>0 && role[0] == "Admin")
                     {
                         return Redirect("/Admin/Products");
                     }

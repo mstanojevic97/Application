@@ -1,18 +1,86 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0px;
+    padding: 5px;
+    font-family: Calibri, sans-serif;
+}
+
+.column {
+    width: 1000px;
+    margin: 0px auto;
+}
+#logo-holder {
+    flex-grow: 1;
+}
+
+#logo-holder img {
+    width: 100px;
+    height: 70px;
+}
+#main-manu {
+    margin-right:2px;
+    display: block;
+    padding: 5px 0px;
+    min-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    transition: 300ms;
+}
+#main-manu:hover {
+    background: #808080;
+    color: #ffffff;
+}
+#main-manu > a {
+    flex-grow: 2;
+    display: block;
+    padding: 10px 0px;
+    text-decoration: none;
+    color: #ffffff;
+    width: 150px;
+    transition: 200ms;
+    text-align: center;
+}
+#main-manu > a :hover {
+    background: #1e1f6d;
+    color: #ffffff;
+    transition: 300ms;
+}
+#comercial {
+    color: white;
+    text-align: center;
+    background: url('/media/img//bg1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    height:100vh;
+}
+.page .column {
+    height: 100vh;
+    align-content:center;
+    text-align:center;
+}
+.align-center {
+    text-align:center;
+}
+#products h2 {
+    padding-top: 50px;
+}
+#products {
+    height:100vh;
+    align-self:center;
+    text-align:center;
 }

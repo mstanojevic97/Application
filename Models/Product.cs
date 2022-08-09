@@ -1,4 +1,5 @@
 ﻿using Application.Infrastructure.Validation;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,8 +12,6 @@ namespace Application.Models
         public string Name { get; set; }
         public string Slug { get; set; }
         public string Description { get; set; }
-        [Required(ErrorMessage = "Please enter a value")]
-        public double Size { get; set; }
         [Required(ErrorMessage = "Please enter a value")]
         public double Price { get; set; }
         public int BrandId { get; set; }

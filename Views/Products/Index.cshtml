@@ -3,24 +3,35 @@
 @{
     ViewData["Tittle"] = "Products";
 }
-<h1>Products</h1>
+<h1 style="text-align:center;">Products</h1>
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-4">
-            <img src="/media/products/@item.Image" class="img-fluid" alt="@item.Image">
-            <h4>@item.Name</h4>
-            <div>
-                @Html.Raw(item.Description)
+    <div class="col-3">
+        <div class="col-sm-6">
+            <div class="bg-success mt-3 p-3 text-white">
+                <vc:small-cart />
             </div>
-            <p>
-                @item.Price.ToString("C2")
-            </p>
-            <p>
-                <a class="btn btn-primary" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">Add to cart</a>
-            </p>
         </div>
-    }
+    </div>
+    <div class="col-9">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-4">
+                    <img src="/media/products/@item.Image" class="img-fluid" alt="@item.Image">
+                    <h4>@item.Name</h4>
+                    <div>
+                        @Html.Raw(item.Description)
+                    </div>
+                    <p>
+                        @item.Price.ToString("C2")
+                    </p>
+                    <p>
+                        <a class="btn btn-primary" asp-controller="Products" asp-action="SingleProduct" asp-route-id="@item.Id">View product</a>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
     @if (ViewBag.TotalPages > 1)
     {
         <div class="d-flex w-100 justify-content-center">

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<InvoiceItem>
+
+@{
+    ViewData["Tittle"] = "Invoices";
+}
+<h1>Invoices</h1>
+
+<table class="table" style="text-align:center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Size</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @foreach (var u in ViewBag.Users)
+                    {
+                        if (u.Id == @item.Invoice.UserId)
+                        {
+                            @u.UserName
+                            ;
+                        }
+                    }
+                </td>
+                <td>
+                    @item.Invoice.Created
+                </td>
+                <td>
+                    @item.Product.Name
+                </td>
+                <td>
+                    @item.Size.Value
+                </td>
+                <td>
+                    @item.Amount
+                </td>
+                <td>
+                    @item.Invoice.Status
+                </td>
+                <td>
+                    @if (@item.Invoice.Status == "In Progres")
+                    {
+                        <a class="btn btn-primary btn-sm" asp-controller="InvoiceItems" asp-action="Complete" asp-route-id="@item.InvoiceId">Complete</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger btn-sm" asp-controller="InvoiceItems" asp-action="Delete" asp-route-id="@item.Id" >Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="d-flex w-100 justify-content-center">
+    <pagination page-count="@ViewBag.TotalPages"
+                page-target="/Admin/InvoicItems"
+                page-number="@ViewBag.PageNumber"
+                page-range="@ViewBag.PageRange">
+    </pagination>
+</div>

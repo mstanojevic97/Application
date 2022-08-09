@@ -3,12 +3,11 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-<h1>Login</h1>
-
-<hr />
 <div class="row">
-    <div class="col-12">
+    <div class="col"></div>
+    <div class="col-4">
+        <h1>Login</h1>
+        <hr />
         <form asp-action="Login">
             <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -31,4 +30,5 @@
             </div>
         </form>
     </div>
+    <div class="col"></div>
 </div>

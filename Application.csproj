@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\media\img\" />
     <Folder Include="wwwroot\media\products\" />
   </ItemGroup>
 

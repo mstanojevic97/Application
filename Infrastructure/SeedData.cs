@@ -16,10 +16,9 @@ namespace Application.Infrastructure
                 Gender woman = new Gender { Name = "Woman", Slug = "woman" };
                 Gender kids = new Gender { Name = "Kids", Slug = "kids" };
                 Category sneakers = new Category { Name = "Sneakers" };
-                Category t_shirts = new Category { Name = "T-Shirts" };
-                Category sweatshirt = new Category { Name = "Sweatshirt" };
-                Category pants = new Category { Name = "Pants" };
-                Brand nike = new Brand { Name = "nike", Slug = "nike" };
+                Category sweatsuit = new Category { Name = "Sweatsuit" };
+                Category t_shirts = new Category { Name = "T_Shirts" };
+                Brand nike = new Brand { Name = "Nike", Slug = "nike" };
                 Brand adidas = new Brand { Name = "Adidas", Slug = "adidas" };
                 Brand puma = new Brand { Name = "Puma", Slug = "puma" };
                 Brand champion = new Brand { Name = "Champion", Slug = "champion" };
@@ -30,7 +29,6 @@ namespace Application.Infrastructure
                             Name = "Nike AIR MAX COMMAND",
                             Slug = "air max",
                             Description = "Nike AIR MAX COMMAND",
-                            Size = 42.5,
                             Price = 17900,
                             Brand = nike,
                             Category = sneakers,
@@ -42,10 +40,9 @@ namespace Application.Infrastructure
                             Name = "Adidas Astir",
                             Slug = "adidas",
                             Description = "Adidas Astir",
-                            Size = 38,
                             Price = 8900,
                             Brand = adidas,
-                            Category = sweatshirt,
+                            Category = sneakers,
                             Gender = kids,
                             Image = "adidas_sw.jpg"
                         },
@@ -54,7 +51,6 @@ namespace Application.Infrastructure
                             Name = "Puma T-Shirt",
                             Slug = "puma",
                             Description = "Puma T-Shirt",
-                            Size = 3,
                             Price = 8900,
                             Brand = puma,
                             Category = t_shirts,
@@ -66,10 +62,9 @@ namespace Application.Infrastructure
                             Name = "Champion pants",
                             Slug = "champion",
                             Description = "Champion Pants",
-                            Size = 3,
                             Price = 8900,
                             Brand = champion,
-                            Category = pants,
+                            Category = sweatsuit,
                             Gender = man,
                             Image = "champion.jpg"
                         }

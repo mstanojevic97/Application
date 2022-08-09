@@ -21,8 +21,7 @@ namespace Application.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(int p = 1)
         {
-            Console.WriteLine(await _context.Genders.FirstOrDefaultAsync());
-            int pageSize = 5;
+            int pageSize = 10;
             ViewBag.PageNumber = p;
             ViewBag.PageRange = pageSize;
             ViewBag.TotalPages = (int)Math.Ceiling((decimal)_context.Products.Count() / pageSize);
@@ -39,8 +38,8 @@ namespace Application.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Brands = new SelectList(_context.Brands, "Id", "Name");
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
             ViewBag.Genders = new SelectList(_context.Genders, "Id", "Name");
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -48,8 +47,8 @@ namespace Application.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Product product)
         {
             ViewBag.Brands = new SelectList(_context.Brands, "Id", "Name", product.BrandId);
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             ViewBag.Genders = new SelectList(_context.Genders, "Id", "Name", product.GenderId);
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
 
             if (ModelState.IsValid)
             {
@@ -81,8 +80,8 @@ namespace Application.Areas.Admin.Controllers
         {
             Product product = await _context.Products.FindAsync(id);
             ViewBag.Brands = new SelectList(_context.Brands, "Id", "Name", product.BrandId);
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             ViewBag.Genders = new SelectList(_context.Genders, "Id", "Name", product.GenderId);
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
 
 
             return View(product);
@@ -92,8 +91,8 @@ namespace Application.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id, Product product)
         {
             ViewBag.Brands = new SelectList(_context.Brands, "Id", "Name", product.BrandId);
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             ViewBag.Genders = new SelectList(_context.Genders, "Id", "Name", product.GenderId);
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
 
             if (ModelState.IsValid)
             {

@@ -4,28 +4,31 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-<hr />
+
 <drv class="row">
-    <div class="col-12">
+    <div class="col">
+    </div>
+    <div class="col-4">
+        <h1>Create</h1>
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control"/>
+                <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control"/>
+                <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control"/>
+                <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
@@ -33,5 +36,8 @@
                 <button class="btn btn-primary mt-2">Register</button>
             </div>
         </form>
+    </div>
+    <div class="col">
+
     </div>
 </drv>

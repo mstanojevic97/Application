@@ -5,7 +5,9 @@
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int Quantity { get; set; }
-        public double Size { get; set; }
+        public int SizeId { get; set; }
+        public Size Size { get; set; }
+        public int Amount { get; set; }
         public double Price { get; set; }
         public double Total
         {
@@ -21,7 +23,6 @@
             ProductName = product.Name;
             Price = product.Price;
             Quantity = 1;
-            Size = product.Size;
             Image = product.Image;
         }
     }
